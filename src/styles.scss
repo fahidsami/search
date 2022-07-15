@@ -1,0 +1,146 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) -12%,
+            rgba(255, 255, 255, 0.6)), url("../src/assets/images/ales-nesetril-Im7lZjxeLhg-unsplash.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    min-height: 100vh;
+}
+.cardContainer {
+    // background: white;
+    // margin-top: 15%;
+    // height: 244px;
+    // padding: 40px;
+    // border-radius: 12px;
+    // box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
+
+    background: white;
+    margin-top: 15%;
+    height: 280px;
+    padding: 56px;
+    border-radius: 12px;
+    box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
+}
+.cardContainerItem {
+    background: white;
+    margin-top: 10%;
+    width: fit-content;
+    height: 70vh;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
+}
+
+// .centerScreen {
+//     margin-top: 6%;
+// }
+
+.title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.searchFieldContainer {
+    flex: 1;
+    display: flex;
+    padding: 5px 8px 0 14px;
+}
+
+.containerOutlet {
+    display: flex;
+    z-index: 3;
+    height: 44px;
+    background: #fff;
+    border: 1px solid #dfe1e5;
+    box-shadow: none;
+    border-radius: 24px;
+    margin: 0 auto;
+
+    width: 584px;
+
+    // width: auto;
+    &:hover {
+        background-color: #fff;
+        box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
+        border-color: rgba(223, 225, 229, 0);
+    }
+}
+
+.iconContainer {
+    margin-top: 8px;
+    margin-right: 13px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+
+    .searchFieldStyling {
+        width: 100%;
+        border: none;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+
+
+
+.itemsdetailsContainer {
+
+
+
+    .itemStyling {
+        width: 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 15%;
+        margin-left: auto;
+        margin-right: auto;
+        h2,
+        p {
+            font-size: 30px;
+            font-weight: 600;
+        }
+    }
+
+    .backBtnContainer {
+        position: absolute;
+        position: absolute;
+        top: 16px;
+        left: 16px;
+
+        .iconContainerBack {
+            width: 22px;
+            display: flex;
+            align-items: center;
+            margin: auto;
+        }
+    }
+
+    .backBtn {
+        width: 50px;
+        height: 50px;
+        background-color: gainsboro;
+        color: #fff;
+        border-radius: 50%;
+
+        &:hover {
+            background-color: rgb(137, 137, 137);
+            box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
+            border-color: rgba(223, 225, 229, 0);
+        }
+    }
+}
