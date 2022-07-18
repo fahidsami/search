@@ -1,7 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { RandomItem, SearchItemsServiceService } from "../../services/search-items-service.service";
+import { combineLatest, debounceTime, map, Observable, startWith } from "rxjs";
+import {
+  RandomItem,
+  SearchItemsServiceService,
+} from "../../services/search-items-service.service";
 
 @Component({
   selector: "app-search",
@@ -9,25 +13,38 @@ import { RandomItem, SearchItemsServiceService } from "../../services/search-ite
   styleUrls: ["./search.component.scss"],
 })
 export class SearchComponent implements OnInit {
-  searchField = new FormControl();
-  itemsList: RandomItem[] = [];
+  searchField: FormControl;
+  itemsList!: Observable<RandomItem[]>;
+  showit: boolean;
 
   constructor(
     private itemsService: SearchItemsServiceService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+    this.searchField = new FormControl("");
+    this.showit = false;
+  }
 
   ngOnInit(): void {
-    this.itemsService.getItemsList().subscribe((itemsList) => {
-      this.itemsList = itemsList;
-    });
+    const items$: Observable<RandomItem[]> = this.itemsService.getItemsList();
+    const searchTerm$: Observable<string> = this.searchField.valueChanges.pipe(
+      startWith(this.searchField.value)
+    );
+    this.itemsList = combineLatest([items$, searchTerm$]).pipe(
+      debounceTime(300),
+      map(([items, searchValue]) => {
+        return items.filter((el) =>
+          el.name.toLocaleLowerCase().includes(searchValue)
+        );
+      })
+    );
   }
 
-  onItemClick(item: any) {
+  onItemClick(item: RandomItem) {
     this.router.navigate([item.id, "details"], { relativeTo: this.route });
   }
-  showit = false;
+
   focusOutFunction() {
     this.showit = true;
   }

@@ -1,4 +1,4 @@
-<div class="itemsdetailsContainer">
+<div *ngIf="item | async as item" class="itemsdetailsContainer">
   <div class="backBtnContainer">
     <button class="btn col-1 backBtn" [routerLink]="['/search']">
       <div class="iconContainerBack">

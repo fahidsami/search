@@ -1,29 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { RandomItem, SearchItemsServiceService } from '../../services/search-items-service.service';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { map, Observable } from "rxjs";
+import {
+  RandomItem,
+  SearchItemsServiceService,
+} from "../../services/search-items-service.service";
 
 @Component({
-  selector: 'app-item-details',
-  templateUrl: './item-details.component.html',
-  styleUrls: ['./item-details.component.scss'],
+  selector: "app-item-details",
+  templateUrl: "./item-details.component.html",
+  styleUrls: ["./item-details.component.scss"]
 })
 export class ItemDetailsComponent implements OnInit {
-  item: RandomItem | undefined;
+  item!: Observable<RandomItem>;
 
   constructor(
     private itemsService: SearchItemsServiceService,
-    private route: ActivatedRoute,
-    private router: Router
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    let id = this.route.snapshot.params['id'];
-    this.itemsService.getDetails(id).subscribe((itemDetails) => {
-      if (!itemDetails) {
-        this.router.navigate(['not-found']);
-      } else {
-        this.item = itemDetails;
-      }
-    });
+    const id = this.route.snapshot.params["id"];
+    this.item = this.itemsService.getItemsList().pipe(
+      map((data: any) => data.find((el: any) => el.id == id)
+    ));
   }
 }

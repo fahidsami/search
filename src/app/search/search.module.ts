@@ -7,7 +7,6 @@ import { ItemDetailsComponent } from './components/item-details/item-details.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchRoutingModule } from './search-routing.module';
 import { SearchListComponent } from './components/search-list/search-list.component';
-import { SearchFilterPipePipe } from './pipes/search-filter-pipe.pipe';
 import { SearchItemsServiceService } from './services/search-items-service.service';
 
 
@@ -15,8 +14,7 @@ import { SearchItemsServiceService } from './services/search-items-service.servi
   declarations: [
     SearchComponent,
     ItemDetailsComponent,
-    SearchListComponent,
-    SearchFilterPipePipe
+    SearchListComponent
   ],
   providers: [
     SearchItemsServiceService
