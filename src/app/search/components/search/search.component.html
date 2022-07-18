@@ -29,18 +29,18 @@
           <span class="py-0">
             <p>
               Total Items:
-              {{ (itemsList | async)?.length }}
+              {{ (personList | async)?.length }}
             </p>
           </span>
           <a class="list-group-item list-group-item-action py-0">
             <hr class="style-one" />
           </a>
           <a
-            *ngFor="let item of itemsList | async"
-            (click)="onItemClick(item)"
+            *ngFor="let person of personList | async"
+            (click)="onItemClick(person)"
             class="list-group-item list-group-item-action"
           >
-            {{ item.name }}
+            {{ person.name }}
           </a>
         </div>
       </div>

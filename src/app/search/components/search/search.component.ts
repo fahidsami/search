@@ -3,7 +3,7 @@ import { FormControl } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { combineLatest, debounceTime, map, Observable, startWith } from "rxjs";
 import {
-  RandomItem,
+  Person,
   SearchItemsServiceService,
 } from "../../services/search-items-service.service";
 
@@ -14,7 +14,7 @@ import {
 })
 export class SearchComponent implements OnInit {
   searchField: FormControl;
-  itemsList!: Observable<RandomItem[]>;
+  personList!: Observable<Person[]>;
   showit: boolean;
 
   constructor(
@@ -27,22 +27,22 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const items$: Observable<RandomItem[]> = this.itemsService.getItemsList();
+    const persons$: Observable<Person[]> = this.itemsService.getItemsList();
     const searchTerm$: Observable<string> = this.searchField.valueChanges.pipe(
       startWith(this.searchField.value)
     );
-    this.itemsList = combineLatest([items$, searchTerm$]).pipe(
+    this.personList = combineLatest([persons$, searchTerm$]).pipe(
       debounceTime(300),
-      map(([items, searchValue]) => {
-        return items.filter((el) =>
-          el.name.toLocaleLowerCase().includes(searchValue)
+      map(([persons, searchValue]) => {
+        return persons.filter(person =>
+          person.name.toLocaleLowerCase().includes(searchValue)
         );
       })
     );
   }
 
-  onItemClick(item: RandomItem) {
-    this.router.navigate([item.id, "details"], { relativeTo: this.route });
+  onItemClick(person: Person) {
+    this.router.navigate([person.id, "details"], { relativeTo: this.route });
   }
 
   focusOutFunction() {

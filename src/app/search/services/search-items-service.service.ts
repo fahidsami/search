@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
-export interface RandomItem {
+export interface Person {
   id: number;
   name: string;
   profession: string;

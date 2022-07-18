@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { map, Observable } from "rxjs";
 import {
-  RandomItem,
+  Person,
   SearchItemsServiceService,
 } from "../../services/search-items-service.service";
 
@@ -12,7 +12,7 @@ import {
   styleUrls: ["./item-details.component.scss"]
 })
 export class ItemDetailsComponent implements OnInit {
-  item!: Observable<RandomItem>;
+  person!: Observable<Person>;
 
   constructor(
     private itemsService: SearchItemsServiceService,
@@ -21,8 +21,8 @@ export class ItemDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.params["id"];
-    this.item = this.itemsService.getItemsList().pipe(
-      map((data: any) => data.find((el: any) => el.id == id)
+    this.person = this.itemsService.getItemsList().pipe(
+      map((persons: any) => persons.find((person: Person) => person.id == id)
     ));
   }
 }
